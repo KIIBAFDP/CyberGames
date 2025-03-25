@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Window extends JFrame {
     private JTextField userField;
@@ -68,7 +69,7 @@ public class Window extends JFrame {
             messageLabel.setForeground(Color.GREEN);
             messageLabel.setText("Connexion réussie !");
             dispose(); // Ferme la fenêtre actuelle
-            new CodeVerification(userId).setVisible(true); // Ouvre la nouvelle fenêtre
+            new ForfaitWindow(userId).setVisible(true); // Ouvre la nouvelle fenêtre pour afficher les forfaits
         } else {
             messageLabel.setForeground(Color.RED);
             messageLabel.setText(message);
