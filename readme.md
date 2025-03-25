@@ -83,8 +83,7 @@ Affiche la fenêtre de connexion et gère les interactions de l'utilisateur pour
 Dépendances
 mysql-connector-java : Connecteur JDBC pour MySQL.
 jbcrypt : Bibliothèque pour le hachage des mots de passe.
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
 
 
 Assurez-vous de remplacer `<URL_DU_DEPOT>` par l'URL réelle de votre dépôt Git. Vous pouvez également ajouter des sections supplémentaires si nécessaire, telles que des instructions de déploiement ou des informations sur les contributions.
