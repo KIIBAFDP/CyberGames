@@ -15,19 +15,41 @@ CyberGames est une application Java pour la gestion des forfaits de réservation
 
 Le projet est structuré comme suit :
 
-CyberGames/ ├── src/ │ ├── main/ │ │ ├── java/ │ │ │ ├── DbConnect.java │ │ │ ├── ForfaitManager.java │ │ │ ├── ForfaitWindow.java │ │ │ ├── Login.java │ │ │ ├── Main.java │ │ │ └── Window.java ├── lib/ │ ├── jbcrypt-0.4.jar │ └── mysql-connector-java-8.0.25.jar ├── target/ │ ├── classes/ │ ├── maven-archiver/ │ └── cybergames-1.0-SNAPSHOT.jar ├── .idea/ ├── .gitignore ├── pom.xml └── README.md
+```
+CyberGames/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── DbConnect.java
+│   │   │   ├── ForfaitManager.java
+│   │   │   ├── ForfaitWindow.java
+│   │   │   ├── Login.java
+│   │   │   ├── Main.java
+│   │   │   └── Window.java
+├── lib/
+│   ├── jbcrypt-0.4.jar
+│   └── mysql-connector-java-8.0.25.jar
+├── target/
+│   ├── classes/
+│   ├── maven-archiver/
+│   └── cybergames-1.0-SNAPSHOT.jar
+├── .idea/
+├── .gitignore
+├── pom.xml
+└── README.md
+```
 
-### Prérequis
+## Prérequis
 
 - Java 17 ou supérieur
 - Maven
 - MySQL
 
-### Installation
+## Installation
 
 1. Clonez le dépôt :
     ```sh
-    git clone <URL_DU_DEPOT>
+    git clone https://github.com/KIIBAFDP/CyberGames.git
     cd CyberGames
     ```
 
@@ -53,37 +75,45 @@ CyberGames/ ├── src/ │ ├── main/ │ │ ├── java/ │ │ �
 
 Pour lancer l'application, exécutez la commande suivante :
 ```sh
-java -jar [cybergames-1.0-SNAPSHOT-jar-with-dependencies.jar](http://_vscodecontentref_/10)
+java -jar target/cybergames-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
 
-Connexion
-Entrez votre nom d'utilisateur et votre mot de passe dans la fenêtre de connexion.
-Cliquez sur le bouton "Connexion".
-Affichage des forfaits
+### Connexion
+
+1. Entrez votre nom d'utilisateur et votre mot de passe dans la fenêtre de connexion.
+2. Cliquez sur le bouton "Connexion".
+
+### Affichage des forfaits
+
 Après une connexion réussie, une nouvelle fenêtre s'ouvre affichant les forfaits de réservation de l'utilisateur connecté. Chaque forfait affiche le temps restant pour la session.
 
-Code Source
-Main.java
+## Code Source
+
+### `Main.java`
+
 Le point d'entrée de l'application. Affiche un message "Hello, World!" (peut être modifié ou supprimé).
 
-Login.java
+### `Login.java`
+
 Gère la vérification des identifiants de connexion des utilisateurs.
 
-ForfaitWindow.java
+### `ForfaitWindow.java`
+
 Affiche les forfaits de réservation de l'utilisateur connecté et gère le suivi du temps restant pour chaque forfait.
 
-ForfaitManager.java
+### `ForfaitManager.java`
+
 Gère le temps restant pour les forfaits de réservation et met à jour la base de données.
 
-DbConnect.java
+### `DbConnect.java`
+
 Gère la connexion à la base de données MySQL.
 
-Window.java
+### `Window.java`
+
 Affiche la fenêtre de connexion et gère les interactions de l'utilisateur pour la connexion.
 
-Dépendances
-mysql-connector-java : Connecteur JDBC pour MySQL.
-jbcrypt : Bibliothèque pour le hachage des mots de passe.
+## Dépendances
 
-
-
-Assurez-vous de remplacer `<URL_DU_DEPOT>` par l'URL réelle de votre dépôt Git. Vous pouvez également ajouter des sections supplémentaires si nécessaire, telles que des instructions de déploiement ou des informations sur les contributions.
+- `mysql-connector-java` : Connecteur JDBC pour MySQL.
+- `jbcrypt` : Bibliothèque pour le hachage des mots de passe.
