@@ -75,16 +75,42 @@ public class ForfaitWindow extends JFrame {
 
     private void handleForfaitClick(int bookingId, LocalDateTime startTime, LocalDateTime endTime, JLabel timerLabel) {
         LocalDateTime now = LocalDateTime.now();
+        final LocalDateTime[] mutableEndTime = {endTime}; // Utiliser un tableau pour rendre endTime mutable
 
-        if (now.isAfter(startTime) && now.isBefore(endTime)) {
+        if (now.isAfter(startTime) && now.isBefore(mutableEndTime[0])) {
             JOptionPane.showMessageDialog(this, "Session démarrée pour le forfait: " + bookingId);
-            startTimer(endTime, timerLabel);
+
+            // Créer le bouton pour ajouter du temps
+            JButton addTimeButton = new JButton("Ajouter 10 minutes");
+            addTimeButton.setVisible(true); // Rendre le bouton visible uniquement pendant la session
+            addTimeButton.addActionListener(e -> {
+                try {
+                    // Ajouter 10 minutes au timer
+                    ForfaitManager forfaitManager = new ForfaitManager();
+                    forfaitManager.addTimeToBooking(bookingId, 10);
+
+                    // Mettre à jour l'heure de fin localement
+                    mutableEndTime[0] = mutableEndTime[0].plusMinutes(10);
+
+                    JOptionPane.showMessageDialog(this, "10 minutes ajoutées !");
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de temps : " + ex.getMessage());
+                }
+            });
+
+            // Ajouter le bouton à l'interface
+            forfaitPanel.add(addTimeButton, BorderLayout.NORTH);
+            forfaitPanel.revalidate();
+            forfaitPanel.repaint();
+
+            // Démarrer le timer
+            startTimer(mutableEndTime[0], timerLabel, addTimeButton);
         } else {
             JOptionPane.showMessageDialog(this, "Ce n'est pas l'heure de votre session.");
         }
     }
 
-    private void startTimer(LocalDateTime endTime, JLabel timerLabel) {
+    private void startTimer(LocalDateTime endTime, JLabel timerLabel, JButton addTimeButton) {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -98,7 +124,10 @@ public class ForfaitWindow extends JFrame {
                     SwingUtilities.invokeLater(() -> timerLabel.setText(String.format("Temps restant: %02d:%02d:%02d", hours, minutes, seconds)));
                 } else {
                     timer.cancel();
-                    SwingUtilities.invokeLater(() -> timerLabel.setText("Forfait expiré!"));
+                    SwingUtilities.invokeLater(() -> {
+                        timerLabel.setText("Forfait expiré!");
+                        addTimeButton.setVisible(false); // Cacher le bouton lorsque le timer est terminé
+                    });
                 }
             }
         }, 0, 1000);

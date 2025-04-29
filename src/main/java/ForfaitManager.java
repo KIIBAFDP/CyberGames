@@ -97,4 +97,15 @@ public class ForfaitManager {
             e.printStackTrace();
         }
     }
+
+    public void addTimeToBooking(int bookingId, int additionalMinutes) throws SQLException {
+        String query = "UPDATE booking SET end_time = DATE_ADD(end_time, INTERVAL ? MINUTE) WHERE id = ?";
+
+        try (Connection connection = DbConnect.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, additionalMinutes);
+            statement.setInt(2, bookingId);
+            statement.executeUpdate();
+        }
+    }
 }
